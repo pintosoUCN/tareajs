@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calcular Factorial</title>
+</head>
+<body>
+    <script>
+        // Solicitar al usuario un número entero
+        var numero = parseInt(prompt("Introduce un número entero para calcular su factorial:"));
+
+        // Inicializar una variable para almacenar el factorial
+        var factorial = 1;
+
+        // Comprobar si el número es negativo
+        if (numero < 0) {
+            document.write("El factorial de un número negativo no está definido.");
+        } else if (numero === 0) {
+            document.write("El factorial de 0 es 1.");
+        } else {
+            // Calcular el factorial utilizando un bucle for
+            for (var i = 1; i <= numero; i++) {
+                factorial *= i;
+            }
+            document.write("El factorial de " + numero + " es " + factorial);
+        }
+    </script>
+</body>
+</html>

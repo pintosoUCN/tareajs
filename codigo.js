@@ -118,27 +118,188 @@ if (numeroDNI < 0 || numeroDNI > 99999999) {
 
 
 
-//EJERCICIO 7
-// Solicitar al usuario un número entero
-var numero = parseInt(prompt("Introduce un número entero para calcular su factorial:"));
-
-// Inicializar una variable para almacenar el factorial
-var factorial = 1;
-
-// Comprobar si el número es negativo
-if (numero < 0) {
-  console.log("El factorial de un número negativo no está definido.");
-} else if (numero === 0) {
-  console.log("El factorial de 0 es 1.");
-} else {
-  // Calcular el factorial utilizando un bucle for
-  for (var i = 1; i <= numero; i++) {
-    factorial *= i;
+//EJERCICIO 8
+function determinarParidad(numero) {
+    if (numero % 2 === 0) {
+      return "El número es par.";
+    } else {
+      return "El número es impar.";
+    }
   }
-  console.log("El factorial de " + numero + " es " + factorial);
+  
+// Ejemplo de uso de la función
+var numero = 7;
+var resultado = determinarParidad(numero);
+console.log(resultado); // Mostrará "El número es impar."
+  
+
+
+//EJERCICIO 9
+function determinarMayusculasMinusculas(cadena) {
+    // Comprobar si la cadena contiene solo letras minúsculas
+    if (cadena === cadena.toLowerCase()) {
+      return "La cadena está formada solo por minúsculas.";
+    }
+    // Comprobar si la cadena contiene solo letras mayúsculas
+    else if (cadena === cadena.toUpperCase()) {
+      return "La cadena está formada solo por mayúsculas.";
+    } else {
+      return "La cadena es una mezcla de mayúsculas y minúsculas.";
+    }
+  }
+  
+// Ejemplo de uso de la función
+var texto1 = "mayusculas";
+var texto2 = "MINUSCULAS";
+var texto3 = "MeZcla";
+  
+console.log(determinarMayusculasMinusculas(texto1)); // Mostrará "La cadena está formada solo por minúsculas."
+console.log(determinarMayusculasMinusculas(texto2)); // Mostrará "La cadena está formada solo por mayúsculas."
+console.log(determinarMayusculasMinusculas(texto3)); // Mostrará "La cadena es una mezcla de mayúsculas y minúsculas."
+  
+
+
+//EJERCICIO 10
+function esPalindromo(cadena) {
+    // Eliminar espacios y convertir la cadena a minúsculas
+    cadena = cadena.replace(/ /g, '').toLowerCase();
+    
+    // Invertir la cadena
+    var cadenaInvertida = cadena.split('').reverse().join('');
+    
+    // Comparar la cadena original con la cadena invertida
+    return cadena === cadenaInvertida;
+  }
+  
+// Ejemplo de uso de la función
+var texto1 = "ana";
+var texto2 = "oso";
+var texto3 = "hola";
+  
+console.log(esPalindromo(texto1)); // Mostrará true
+console.log(esPalindromo(texto2)); // Mostrará true
+console.log(esPalindromo(texto3)); // Mostrará false
+  
+
+
+//EJERCICIO 11
+// Objeto Persona
+function Persona(nombre, edad, género) {
+    this.nombre = nombre;
+    this.edad = edad;
+    this.género = género;
+  }
+  
+  Persona.prototype.obtDetalles = function() {
+    console.log("Nombre: " + this.nombre);
+    console.log("Edad: " + this.edad);
+    console.log("Género: " + this.género);
+  };
+  
+  // Objeto Estudiante, hereda de Persona
+  function Estudiante(nombre, edad, género, curso, grupo) {
+    Persona.call(this, nombre, edad, género);
+    this.curso = curso;
+    this.grupo = grupo;
+  }
+  
+  Estudiante.prototype = Object.create(Persona.prototype);
+  Estudiante.prototype.constructor = Estudiante;
+  
+  Estudiante.prototype.registrar = function() {
+    console.log("Curso: " + this.curso);
+    console.log("Grupo: " + this.grupo);
+  };
+  
+  // Objeto Profesor, hereda de Persona
+  function Profesor(nombre, edad, género, asignatura, nivel) {
+    Persona.call(this, nombre, edad, género);
+    this.asignatura = asignatura;
+    this.nivel = nivel;
+  }
+  
+  Profesor.prototype = Object.create(Persona.prototype);
+  Profesor.prototype.constructor = Profesor;
+  
+  Profesor.prototype.asignar = function() {
+    console.log("Asignatura: " + this.asignatura);
+    console.log("Nivel: " + this.nivel);
+  };
+  
+  // Crear objetos y casos de prueba
+  var estudiante1 = new Estudiante("Juan", 20, "Masculino", "Matemáticas", "A");
+  var profesor1 = new Profesor("Ana", 35, "Femenino", "Historia", "Avanzado");
+  
+  console.log("Detalles del estudiante:");
+  estudiante1.obtDetalles();
+  estudiante1.registrar();
+  
+  console.log("\nDetalles del profesor:");
+  profesor1.obtDetalles();
+  profesor1.asignar();
+
+  
+
+//EJERCICIO 12
+// Crear un array para almacenar la cantidad de veces que aparece cada suma
+var resultados = new Array(11);
+
+// Inicializar el array con ceros
+for (var i = 0; i < resultados.length; i++) {
+  resultados[i] = 0;
+}
+
+// Simular el lanzamiento de dos dados 36,000 veces
+var lanzamientos = 36000;
+
+for (var i = 0; i < lanzamientos; i++) {
+  // Generar números aleatorios entre 1 y 6 para los dos dados
+  var dado1 = Math.floor(Math.random() * 6) + 1;
+  var dado2 = Math.floor(Math.random() * 6) + 1;
+  
+  // Sumar los resultados de los dos dados
+  var suma = dado1 + dado2;
+  
+  // Incrementar el contador de la suma en el array
+  resultados[suma - 2]++;
+}
+
+// Mostrar los resultados
+for (var i = 0; i < resultados.length; i++) {
+  console.log("Suma " + (i + 2) + " aparece " + resultados[i] + " veces.");
 }
 
 
 
-//EJERCICIO 8
+//EJERCICIO 13
+//Validar una fecha en formato "XX/XX/XXXX"
+var texto = "Nací el 05/04/1982 en Antofagasta.";
+var regex = /\d{2}\/\d{2}\/\d{4}/;
+var resultado = regex.test(texto);
+console.log(resultado);
+
+//Validar una dirección de correo electrónico
+var email = "joaquin@example.com";
+var regex = /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$/;
+var resultado = regex.test(email);
+console.log(resultado); // Devolverá true
+
+//Reemplazar caracteres utilizando expresiones regulares
+function escapeHTML(text) {
+  return text.replace(/&/g, "&amp;")
+             .replace(/"/g, "&quot;")
+             .replace(/</g, "&lt;")
+             .replace(/>/g, "&gt");
+}
+
+//Mostrar nombre y apellido en orden inverso y separados por una coma
+var nombreCompleto = "John Smith";
+var regex = /(\w+) (\w+)/;
+var resultado = nombreCompleto.replace(regex, "$2, $1");
+console.log(resultado); // Devolverá "Smith, John"
+
+//Eliminar etiquetas peligrosas de una cadena HTML
+var html = '<div>Este es un ejemplo de <script>alert("script peligroso");</script> HTML.</div>';
+var regex = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+var resultado = html.replace(regex, "");
 

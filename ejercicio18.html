@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Ejercicio 18 - Información sobre eventos</title>
+
+    <style type="text/css">
+        body {font-family: arial, helvetica;}
+        .box {width:160px; height:160px; border:thin solid silver; padding:.5em; float: left; margin-right: 15px;}
+        .box h1 {margin: 0;}
+    </style>
+</head>
+
+<body>
+    <div id="raton" class="box">
+        <h1>Ratón</h1>
+        <div></div>
+    </div>
+    <div id="teclado" class="box">
+        <h1>Teclado</h1>
+        <div></div>
+    </div>
+
+    <script>
+        // Obtener los elementos div con los IDs "raton" y "teclado"
+        var ratonDiv = document.getElementById("raton");
+        var tecladoDiv = document.getElementById("teclado");
+
+        // Agregar un evento de escucha para el movimiento del ratón
+        document.addEventListener("mousemove", function(event) {
+            // Obtener la posición del puntero del ratón respecto al navegador
+            var posXNavegador = event.clientX;
+            var posYNavegador = event.clientY;
+
+            // Obtener la posición del puntero del ratón respecto a la página
+            var posXPagina = event.pageX;
+            var posYPagina = event.pageY;
+
+            // Mostrar la información en el div "raton"
+            muestraInformacion(ratonDiv, "Ratón", "Navegador [" + posXNavegador + ", " + posYNavegador + "], Página [" + posXPagina + ", " + posYPagina + "]");
+        });
+
+        // Agregar un evento de escucha para las teclas pulsadas
+        document.addEventListener("keydown", function(event) {
+            // Obtener el caracter de la tecla pulsada
+            var tecla = event.key;
+            // Obtener el código de la tecla pulsada
+            var codigo = event.keyCode;
+            // Cambiar el color de fondo del div "teclado" a azul (#CCE6FF)
+            tecladoDiv.style.backgroundColor = "#CCE6FF";
+            // Mostrar la información en el div "teclado"
+            muestraInformacion(tecladoDiv, "Teclado", "Carácter [" + tecla + "], Código [" + codigo + "]");
+        });
+
+        // Agregar un evento de escucha para el clic del ratón
+        document.addEventListener("mousedown", function() {
+            // Cambiar el color de fondo del div "raton" a amarillo
+            ratonDiv.style.backgroundColor = "#FFFFCC";
+        });
+
+        // Agregar un evento de escucha para cuando se mueve el ratón
+        document.addEventListener("mousemove", function() {
+            // Restablecer el color de fondo del div "raton" a blanco
+            ratonDiv.style.backgroundColor = "white";
+            // Restablecer el color de fondo del div "teclado" a blanco
+            tecladoDiv.style.backgroundColor = "white";
+        });
+
+        // Función para mostrar la información en el div correspondiente
+        function muestraInformacion(elemento, titulo, mensaje) {
+            elemento.innerHTML = "<h1>" + titulo + "</h1>" + "<div>" + mensaje + "</div>";
+        }
+    </script>
+</body>
+</html>

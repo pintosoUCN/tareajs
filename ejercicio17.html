@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Ejercicio 17 - DOM básico y atributos XHTML</title>
+</head>
+
+<body>
+	<div>
+    	<p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis
+        enim vitae orci. Phasellus libero. Maecenas nisl arcu, consequat congue,
+        commodo nec, commodo ultricies, turpis. Quisque sapien nunc, posuere vitae,
+        rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae,
+        ultrices porttitor, pede.
+        </p>
+        <a href="#">Mostrar contenidos</a>
+        <div class="contenido" style="display: none;">
+            <p>Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis, faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.</p>
+        </div>
+	</div>
+    <br>
+	<div>
+	    <p>
+	        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis
+	        enim vitae orci. Phasellus libero. Maecenas nisl arcu, consequat congue,
+	        commodo nec, commodo ultricies, turpis. Quisque sapien nunc, posuere vitae,
+	        rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae,
+	        ultrices porttitor, pede.
+	    </p>
+	    <a href="#">Mostrar contenidos</a>
+	    <div class="contenido" style="display: none;">
+	        <p>Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis, faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.</p>
+	    </div>
+	</div>
+    <br>
+	<div>
+	    <p>
+	        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis
+	        enim vitae orci. Phasellus libero. Maecenas nisl arcu, consequat congue,
+	        commodo nec, commodo ultricies, turpis. Quisque sapien nunc, posuere vitae,
+	        rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae,
+	        ultrices porttitor, pede.
+	    </p>
+	    <a href="#">Mostrar contenidos</a>
+	    <div class="contenido" style="display: none;">
+	        <p>Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis, faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.</p>
+	    </div>
+	</div>
+
+    <script>
+        // Obtener todos los elementos 'a' en la página
+        var enlaces = document.getElementsByTagName('a');
+
+        // Recorrer los enlaces y asignar un evento 'click' a cada uno
+        for (var i = 0; i < enlaces.length; i++) {
+            enlaces[i].addEventListener('click', toggleSeccion);
+        }
+
+        function toggleSeccion(event) {
+            // Evitar que se siga el enlace (evita que la página se recargue)
+            event.preventDefault();
+
+            // Obtener el elemento 'a' que se ha hecho clic
+            var enlace = event.target;
+
+            // Obtener el elemento 'div' siguiente al enlace (la sección relacionada)
+            var seccion = enlace.nextElementSibling;
+
+            // Verificar si la sección está oculta
+            if (seccion.style.display === 'none' || seccion.style.display === '') {
+                // Mostrar la sección
+                seccion.style.display = 'block';
+
+                // Cambiar el texto del enlace para ocultar
+                enlace.textContent = 'Ocultar contenidos';
+            } else {
+                // Ocultar la sección
+                seccion.style.display = 'none';
+
+                // Cambiar el texto del enlace para mostrar
+                enlace.textContent = 'Mostrar contenidos';
+            }
+        }
+    </script>
+</body>
+</html>

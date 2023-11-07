@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Ejercicio 19 - Información sobre eventos</title>
+
+    <style type="text/css">
+        body {font-family: arial, helvetica;}
+        .box {width:160px; height:160px; border:thin solid silver; padding:.5em; float: left; margin-right: 15px;}
+        .box h1 {margin: 0;}
+    </style>
+
+    <script>
+        // Obtener el elemento con la clase "posicion"
+        var posicionElement = document.querySelector(".posicion");
+
+        // Agregar un evento de escucha para el clic del ratón
+        document.addEventListener("click", function(event) {
+            // Obtener las dimensiones de la ventana del navegador
+            var dimensiones = tamanoVentanaNavegador();
+            var anchoVentana = dimensiones[0];
+            var altoVentana = dimensiones[1];
+
+            // Obtener las coordenadas X e Y donde se ha hecho clic
+            var posX = event.clientX;
+            var posY = event.clientY;
+
+            // Determinar la zona en la que se ha hecho clic
+            var zona = "";
+
+            if (posX < anchoVentana / 2) {
+                // Clic en la mitad izquierda de la ventana
+                zona += "Izquierda ";
+            } else {
+                // Clic en la mitad derecha de la ventana
+                zona += "Derecha ";
+            }
+
+            if (posY < altoVentana / 2) {
+                // Clic en la mitad superior de la ventana
+                zona += "arriba";
+            } else {
+                // Clic en la mitad inferior de la ventana
+                zona += "abajo";
+            }
+
+            // Mostrar la zona en el elemento "posicion"
+            posicionElement.textContent = "Has hecho clic en la zona: " + zona;
+        });
+
+        // Función para obtener el tamaño de la ventana del navegador
+        function tamanoVentanaNavegador() {
+            var dimensiones = [];
+
+            if (typeof window.innerWidth === "number") {
+                // No es IE
+                dimensiones = [window.innerWidth, window.innerHeight];
+            } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+                // IE 6 en modo estándar (no quirks)
+                dimensiones = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+            } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+                // IE en modo quirks
+                dimensiones = [document.body.clientWidth, document.body.clientHeight];
+            }
+
+            return dimensiones;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <h1>Posición</h1>
+        <span class="posicion"></span>
+    </div>
+</body>
+</html>

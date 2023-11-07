@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Ejercicio 19 - Información sobre eventos</title>
+    
+    <style type="text/css">
+        body {font-family: arial, helvetica;}
+        .box {width:160px; height: 160px; border:thin solid silver; padding:.5em; float: left; margin-right: 15px;}
+        .box h1 {margin: 0;}
+    </style>
+    
+    <script type="text/javascript">
+        function tamanoVentanaNavegador() {
+            var dimensiones = [];
+            
+            if (typeof(window.innerWidth) === 'number') {
+                // No es IE
+                dimensiones = [window.innerWidth, window.innerHeight];
+            } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+                // IE 6 en modo estándar (no quirks)
+                dimensiones = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+            } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+                // IE en modo quirks
+                dimensiones = [document.body.clientWidth, document.body.clientHeight];
+            }
+            
+            return dimensiones;
+        }
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            var inputElement = document.getElementById("inputTexto");
+            var contadorElement = document.getElementById("contador");
+            var maxCaracteres = 100; // Cambia el número máximo de caracteres permitidos
+            
+            // Función para actualizar el contador de caracteres restantes
+            function actualizarContador() {
+                var caracteresRestantes = maxCaracteres - inputElement.value.length;
+                contadorElement.textContent = "Caracteres restantes: " + caracteresRestantes;
+            }
+            
+            // Evento de escucha para el cambio en el campo de entrada
+            inputElement.addEventListener("input", function () {
+                actualizarContador();
+            });
+            
+            // Evento de escucha para el teclado
+            inputElement.addEventListener("keydown", function (event) {
+                if (event.key === "Backspace" || event.key === "Delete" || event.key === "ArrowLeft" || event.key === "ArrowRight") {
+                    // Permitir teclas Backspace, Supr y las flechas horizontales
+                    return;
+                }
+                
+                if (inputElement.value.length >= maxCaracteres) {
+                    // Evitar ingresar más caracteres si se ha alcanzado el límite
+                    event.preventDefault();
+                }
+            });
+            
+            actualizarContador();
+        });
+    </script>
+</head>
+<body>
+    <div class="box">
+        <h1>Contador de Caracteres</h1>
+        <input type="text" id="inputTexto" placeholder="Escribe aquí">
+        <p id="contador">Caracteres restantes: 100</p>
+    </div>
+</body>
+</html>
